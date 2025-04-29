@@ -11,223 +11,776 @@
       padding: 0;
     }
 
+    :root {
+      --primary-color: #4361ee;
+      --primary-light: #4895ef;
+      --primary-dark: #3949ab;
+      --secondary-color: #f72585;
+      --accent-color: #4cc9f0;
+      --success-color: #38b2ac;
+      --warning-color: #f6ad55;
+      --error-color: #e53e3e;
+      --text-primary: #2d3748;
+      --text-secondary: #4a5568;
+      --text-tertiary: #718096;
+      --bg-main: #f8fafc;
+      --bg-card: #ffffff;
+      --border-color: #e2e8f0;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.05);
+      --shadow-lg: 0 10px 15px rgba(0,0,0,0.05), 0 4px 6px rgba(0,0,0,0.05);
+      --shadow-xl: 0 20px 25px rgba(0,0,0,0.05), 0 10px 10px rgba(0,0,0,0.02);
+      --radius-sm: 4px;
+      --radius-md: 6px;
+      --radius-lg: 8px;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      color: #fff;
+      font-family: var(--font-sans);
+      background: linear-gradient(145deg, #f0f4f8 0%, #eef1f5 100%);
+      color: var(--text-primary);
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      padding: 60px 20px;
+      padding: 40px 20px;
+      line-height: 1.5;
     }
 
     .container {
-  width: 100%;
-  max-width: 1100px; /* was 900px before */
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(12px);
-  border-radius: 16px;
-  padding: 40px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  animation: fadeIn 0.8s ease;
-}
+      width: 100%;
+      max-width: 1200px;
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      box-shadow: var(--shadow-xl);
+      animation: fadeIn 0.8s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .app-header {
+      margin-bottom: 40px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 20px;
+      text-align: center;
+    }
 
     h1 {
-      text-align: center;
+      font-size: 32px;
+      color: var(--primary-dark);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+      background: linear-gradient(90deg, var(--primary-dark), var(--primary-color));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .subtitle {
+      color: var(--text-tertiary);
+      margin-top: 8px;
+      font-size: 16px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .form-section {
+      background: linear-gradient(to bottom, #ffffff, #f9fafb);
+      border-radius: var(--radius-md);
+      padding: 30px;
       margin-bottom: 30px;
-      font-size: 2.5rem;
-      color: #fff;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-color);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .form-section:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
     }
 
     form {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 5px;
+      position: relative;
     }
 
     label {
       display: block;
-      font-weight: bold;
-      margin-bottom: 5px;
-      color: #e0e0e0;
+      font-weight: 500;
+      margin-bottom: 6px;
+      color: var(--text-secondary);
+      font-size: 14px;
+      transition: color 0.2s ease;
     }
 
-    input[type="text"] {
+    .form-group:focus-within label {
+      color: var(--primary-color);
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
       width: 100%;
-      padding: 10px;
-      border: none;
-      border-radius: 8px;
+      padding: 10px 12px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
       outline: none;
-      font-size: 1rem;
-      background: rgba(255, 255, 255, 0.2);
-      color: #fff;
-      transition: background 0.3s ease;
+      font-size: 14px;
+      color: var(--text-primary);
+      transition: all 0.2s ease;
+      background-color: #fff;
+      box-shadow: var(--shadow-sm);
     }
 
-    input[type="text"]:focus {
-      background: rgba(255, 255, 255, 0.3);
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    select:focus {
+      border-color: var(--primary-light);
+      box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+    }
+
+    select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%234a5568' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      padding-right: 30px;
+    }
+
+    .form-footer {
+      grid-column: 1 / -1;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    @keyframes glowing {
+      0% { box-shadow: 0 0 5px rgba(67, 97, 238, 0.6); }
+      50% { box-shadow: 0 0 20px rgba(67, 97, 238, 0.8); }
+      100% { box-shadow: 0 0 5px rgba(67, 97, 238, 0.6); }
     }
 
     button[type="submit"] {
-      grid-column: span 2;
-      margin-top: 20px;
-      background: linear-gradient(to right, #43e97b, #38f9d7);
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
       border: none;
-      padding: 12px 20px;
-      font-size: 1.1rem;
+      padding: 14px 32px;
+      font-size: 16px;
       color: #fff;
-      border-radius: 10px;
+      border-radius: 30px;
       cursor: pointer;
-      font-weight: bold;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      animation: glowing 2s infinite;
+      box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
+    }
+
+    button[type="submit"]:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: 0.5s;
     }
 
     button[type="submit"]:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 0 15px rgba(72, 239, 184, 0.6);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(67, 97, 238, 0.4);
+      background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
+    }
+
+    button[type="submit"]:hover:before {
+      left: 100%;
+    }
+
+    button[type="submit"]:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 6px rgba(67, 97, 238, 0.3);
     }
 
     .prediction-results {
-      margin-top: 40px;
-      background-color: rgba(255, 255, 255, 0.12);
-      border-radius: 12px;
+      opacity: 0;
+      animation: slideUp 0.8s ease forwards;
+      animation-delay: 0.2s;
+    }
+
+    .result-card {
+      background-color: var(--bg-card);
+      border-radius: var(--radius-md);
       padding: 30px;
-      animation: slideUp 0.8s ease;
+      margin-bottom: 30px;
+      box-shadow: var(--shadow-md);
+      border-left: 4px solid var(--primary-color);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .prediction-results h3 {
-      color: #00ffc6;
-      text-align: center;
-      font-size: 1.8rem;
+    .result-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .result-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--border-color);
     }
 
-    .prediction-results pre,
-    .prediction-results ul {
-      background-color: rgba(0, 0, 0, 0.3);
+    .prediction-value {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      letter-spacing: -0.5px;
+    }
+
+    .accuracy-badge {
+      background-color: rgba(67, 97, 238, 0.1);
+      color: var(--primary-color);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+    }
+
+    .accuracy-badge:before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background-color: var(--primary-color);
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+
+    .result-card h4 {
+      margin: 25px 0 15px;
+      color: var(--text-secondary);
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      position: relative;
+      padding-left: 12px;
+    }
+
+    .result-card h4:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 4px;
+      height: 18px;
+      background: linear-gradient(to bottom, var(--primary-color), var(--primary-light));
+      border-radius: 2px;
+    }
+
+    .result-card pre {
+      background-color: #f8fafc;
       padding: 15px;
-      border-radius: 8px;
+      border-radius: var(--radius-sm);
       overflow-x: auto;
+      font-size: 13px;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+      font-family: 'SF Mono', 'Menlo', 'Monaco', 'Consolas', monospace;
     }
 
-    .prediction-results ul li {
-      border-bottom: 1px solid #999;
-      padding: 6px 0;
+    .factors-list {
+      list-style: none;
+      margin: 15px 0;
+      background: linear-gradient(to bottom, #ffffff, #f9fafb);
+      border-radius: var(--radius-sm);
+      padding: 5px;
+      border: 1px solid var(--border-color);
     }
 
-    img {
+    .factors-list li {
+      padding: 10px 15px;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      transition: background-color 0.2s ease;
+    }
+
+    .factors-list li:hover {
+      background-color: rgba(67, 97, 238, 0.03);
+    }
+
+    .factors-list li:last-child {
+      border-bottom: none;
+    }
+
+    .factor-name {
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .factor-value {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .factor-value.positive {
+      color: var(--success-color);
+    }
+
+    .factor-value.negative {
+      color: var(--error-color);
+    }
+
+    .career-suggestions {
+      background-color: rgba(67, 97, 238, 0.05);
+      padding: 20px;
+      border-radius: var(--radius-sm);
+      margin: 15px 0;
+      font-style: italic;
+      color: var(--text-secondary);
+      font-size: 15px;
+      border-left: 3px solid var(--primary-light);
+      position: relative;
+    }
+
+    .career-suggestions:before {
+      content: '"';
+      font-size: 40px;
+      color: rgba(67, 97, 238, 0.1);
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-family: Georgia, serif;
+    }
+
+    .visualization-container {
+      margin: 30px 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+    }
+
+    .visualization-card {
+      background-color: var(--bg-card);
+      border-radius: var(--radius-md);
+      padding: 25px;
+      box-shadow: var(--shadow-md);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid var(--border-color);
+    }
+
+    .visualization-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .visualization-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+      text-align: center;
+      letter-spacing: -0.3px;
+    }
+
+    .visualization-card img {
       max-width: 100%;
-      margin-top: 20px;
-      border-radius: 12px;
-      border: 2px solid #00ffc6;
+      border-radius: var(--radius-sm);
+      display: block;
+      margin: 0 auto;
       transition: transform 0.3s ease;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(226, 232, 240, 0.6);
     }
 
-    img:hover {
+    .visualization-card:hover img {
       transform: scale(1.02);
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
+      from { opacity: 0; transform: translateY(-15px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes slideUp {
-      from { opacity: 0; transform: translateY(30px); }
+      from { opacity: 0; transform: translateY(25px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 992px) {
+      form {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .visualization-container {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
     }
 
     @media (max-width: 768px) {
       form {
         grid-template-columns: 1fr;
       }
-
-      button {
-        grid-column: span 1;
+      
+      .container {
+        padding: 25px;
       }
+
+      .result-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .accuracy-badge {
+        align-self: flex-start;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+    }
+
+    /* Focus styles for accessibility */
+    input:focus-visible,
+    select:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 1px;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #c5c9d5;
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #a3a8b8;
+    }
+
+    /* Loading spinner for button */
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .loading-spinner {
+      display: none;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 0.8s linear infinite;
+      margin-left: 8px;
+    }
+
+    button.loading .loading-spinner {
+      display: inline-block;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Income Prediction Dashboard</h1>
-    <form method="POST" action="/predict">
-      <div>
-        <label>Age</label>
-        <input type="text" name="age" required>
-      </div>
-      <div>
-        <label>Workclass</label>
-        <input type="text" name="workclass" required>
-      </div>
-      <div>
-        <label>fnlwgt</label>
-        <input type="text" name="fnlwgt" required>
-      </div>
-      <div>
-        <label>Education</label>
-        <input type="text" name="education" required>
-      </div>
-      <div>
-        <label>Education Number</label>
-        <input type="text" name="education.num" required>
-      </div>
-      <div>
-        <label>Marital Status</label>
-        <input type="text" name="marital.status" required>
-      </div>
-      <div>
-        <label>Occupation</label>
-        <input type="text" name="occupation" required>
-      </div>
-      <div>
-        <label>Relationship</label>
-        <input type="text" name="relationship" required>
-      </div>
-      <div>
-        <label>Race</label>
-        <input type="text" name="race" required>
-      </div>
-      <div>
-        <label>Sex</label>
-        <input type="text" name="sex" required>
-      </div>
-      <div>
-        <label>Native Country</label>
-        <input type="text" name="native.country" required>
-      </div>
-      <button type="submit">Predict</button>
-    </form>
+    <div class="app-header">
+      <h1>Income Prediction Dashboard</h1>
+      <p class="subtitle">Enter your personal and professional details below to predict your income category</p>
+    </div>
+
+    <div class="form-section">
+      <form method="POST" action="/predict">
+        <div class="form-group">
+          <label for="age">Age</label>
+          <input type="number" id="age" name="age" required min="16" max="100" placeholder="Enter your age">
+        </div>
+        <div class="form-group">
+          <label for="workclass">Workclass</label>
+          <select id="workclass" name="workclass" required>
+            <option value="">Select an option</option>
+            <option value="Private">Private</option>
+            <option value="Self-emp-not-inc">Self-employed (not inc)</option>
+            <option value="Self-emp-inc">Self-employed (inc)</option>
+            <option value="Federal-gov">Federal Government</option>
+            <option value="Local-gov">Local Government</option>
+            <option value="State-gov">State Government</option>
+            <option value="Without-pay">Without Pay</option>
+            <option value="Never-worked">Never Worked</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="fnlwgt">Final Weight</label>
+          <input type="number" id="fnlwgt" name="fnlwgt" required placeholder="Enter final weight">
+        </div>
+        <div class="form-group">
+          <label for="education">Education</label>
+          <select id="education" name="education" required>
+            <option value="">Select an option</option>
+            <option value="Bachelors">Bachelor's</option>
+            <option value="Some-college">Some College</option>
+            <option value="HS-grad">High School Graduate</option>
+            <option value="Prof-school">Professional School</option>
+            <option value="Assoc-acdm">Associate's (Academic)</option>
+            <option value="Assoc-voc">Associate's (Vocational)</option>
+            <option value="9th">9th Grade</option>
+            <option value="10th">10th Grade</option>
+            <option value="11th">11th Grade</option>
+            <option value="12th">12th Grade</option>
+            <option value="Masters">Master's</option>
+            <option value="Doctorate">Doctorate</option>
+            <option value="Preschool">Preschool</option>
+            <option value="1st-4th">1st-4th Grade</option>
+            <option value="5th-6th">5th-6th Grade</option>
+            <option value="7th-8th">7th-8th Grade</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="education-num">Education Number</label>
+          <input type="number" id="education-num" name="education.num" required min="1" max="16" placeholder="Enter education number">
+        </div>
+        <div class="form-group">
+          <label for="marital-status">Marital Status</label>
+          <select id="marital-status" name="marital.status" required>
+            <option value="">Select an option</option>
+            <option value="Married-civ-spouse">Married (civilian spouse)</option>
+            <option value="Divorced">Divorced</option>
+            <option value="Never-married">Never Married</option>
+            <option value="Separated">Separated</option>
+            <option value="Widowed">Widowed</option>
+            <option value="Married-spouse-absent">Married (spouse absent)</option>
+            <option value="Married-AF-spouse">Married (AF spouse)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="occupation">Occupation</label>
+          <select id="occupation" name="occupation" required>
+            <option value="">Select an option</option>
+            <option value="Tech-support">Tech Support</option>
+            <option value="Craft-repair">Craft Repair</option>
+            <option value="Other-service">Other Service</option>
+            <option value="Sales">Sales</option>
+            <option value="Exec-managerial">Executive/Managerial</option>
+            <option value="Prof-specialty">Professional Specialty</option>
+            <option value="Handlers-cleaners">Handlers/Cleaners</option>
+            <option value="Machine-op-inspct">Machine Operator/Inspector</option>
+            <option value="Adm-clerical">Administrative Clerical</option>
+            <option value="Farming-fishing">Farming/Fishing</option>
+            <option value="Transport-moving">Transport/Moving</option>
+            <option value="Priv-house-serv">Private House Service</option>
+            <option value="Protective-serv">Protective Service</option>
+            <option value="Armed-Forces">Armed Forces</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="relationship">Relationship</label>
+          <select id="relationship" name="relationship" required>
+            <option value="">Select an option</option>
+            <option value="Wife">Wife</option>
+            <option value="Own-child">Own Child</option>
+            <option value="Husband">Husband</option>
+            <option value="Not-in-family">Not in Family</option>
+            <option value="Other-relative">Other Relative</option>
+            <option value="Unmarried">Unmarried</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="race">Race</label>
+          <select id="race" name="race" required>
+            <option value="">Select an option</option>
+            <option value="White">White</option>
+            <option value="Asian-Pac-Islander">Asian/Pacific Islander</option>
+            <option value="Amer-Indian-Eskimo">American Indian/Eskimo</option>
+            <option value="Other">Other</option>
+            <option value="Black">Black</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="sex">Sex</label>
+          <select id="sex" name="sex" required>
+            <option value="">Select an option</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="native-country">Native Country</label>
+          <select id="native-country" name="native.country" required>
+            <option value="">Select an option</option>
+            <option value="United-States">United States</option>
+            <option value="Cambodia">Cambodia</option>
+            <option value="England">England</option>
+            <option value="Puerto-Rico">Puerto Rico</option>
+            <option value="Canada">Canada</option>
+            <option value="Germany">Germany</option>
+            <option value="Outlying-US(Guam-USVI-etc)">Outlying US</option>
+            <option value="India">India</option>
+            <option value="Japan">Japan</option>
+            <option value="Greece">Greece</option>
+            <option value="South">South</option>
+            <option value="China">China</option>
+            <option value="Cuba">Cuba</option>
+            <option value="Iran">Iran</option>
+            <option value="Honduras">Honduras</option>
+            <option value="Philippines">Philippines</option>
+            <option value="Italy">Italy</option>
+            <option value="Poland">Poland</option>
+            <option value="Jamaica">Jamaica</option>
+            <option value="Vietnam">Vietnam</option>
+            <option value="Mexico">Mexico</option>
+            <option value="Portugal">Portugal</option>
+            <option value="Ireland">Ireland</option>
+            <option value="France">France</option>
+            <option value="Dominican-Republic">Dominican Republic</option>
+            <option value="Laos">Laos</option>
+            <option value="Ecuador">Ecuador</option>
+            <option value="Taiwan">Taiwan</option>
+            <option value="Haiti">Haiti</option>
+            <option value="Columbia">Columbia</option>
+            <option value="Hungary">Hungary</option>
+            <option value="Guatemala">Guatemala</option>
+            <option value="Nicaragua">Nicaragua</option>
+            <option value="Scotland">Scotland</option>
+            <option value="Thailand">Thailand</option>
+            <option value="Yugoslavia">Yugoslavia</option>
+            <option value="El-Salvador">El Salvador</option>
+            <option value="Trinadad&Tobago">Trinidad & Tobago</option>
+            <option value="Peru">Peru</option>
+            <option value="Hong">Hong Kong</option>
+            <option value="Holand-Netherlands">Holland/Netherlands</option>
+          </select>
+        </div>
+        <div class="form-footer">
+          <button type="submit">
+            Generate Prediction
+            <span class="loading-spinner"></span>
+          </button>
+        </div>
+      </form>
+    </div>
 
     {% if prediction %}
     <div class="prediction-results">
-      <h3>Prediction: {{ prediction }}</h3>
-      <p><strong>Accuracy:</strong> {{ accuracy|round(4) }}</p>
-      <h4>Classification Report:</h4>
-      <pre>{{ cr }}</pre>
+      <div class="result-card">
+        <div class="result-header">
+          <div class="prediction-value">
+            Prediction: {{ prediction }}
+          </div>
+          <div class="accuracy-badge">
+            Model Accuracy: {{ accuracy|round(4) }}
+          </div>
+        </div>
 
-      <h4>Factors Influencing Income</h4>
-      <ul>
-        {% for index, row in importance.iterrows() %}
-        <li><strong>{{ row['Feature'] }}:</strong> {{ row['Importance']|round(4) }}</li>
-        {% endfor %}
-      </ul>
+        <h4>Classification Report</h4>
+        <pre>{{ cr }}</pre>
 
-      <h4>Factors Associated with Lower Income</h4>
-      <ul>
-        {% for index, row in low_income_factors.iterrows() %}
-        <li><strong>{{ row['Feature'] }}:</strong> {{ row['Importance']|round(4) }}</li>
-        {% endfor %}
-      </ul>
+        <h4>Factors Influencing Income</h4>
+        <ul class="factors-list">
+          {% for index, row in importance.head(10).iterrows() %}
+          <li>
+            <span class="factor-name">{{ row['Feature'] }}</span>
+            <span class="factor-value {% if row['Importance'] > 0 %}positive{% elif row['Importance'] < 0 %}negative{% endif %}">
+              {{ row['Importance']|round(4) }}
+            </span>
+          </li>
+          {% endfor %}
+        </ul>
 
-      <h4>Suggested Careers:</h4>
-      <p><em>{{ suggestions[0] }}</em></p>
+        <h4>Factors Associated with Lower Income</h4>
+        <ul class="factors-list">
+          {% for index, row in low_income_factors.head(10).iterrows() %}
+          <li>
+            <span class="factor-name">{{ row['Feature'] }}</span>
+            <span class="factor-value negative">{{ row['Importance']|round(4) }}</span>
+          </li>
+          {% endfor %}
+        </ul>
 
-      <h4>Confusion Matrix</h4>
-      <img src="data:image/png;base64,{{ cm_url }}" alt="Confusion Matrix">
+        <h4>Career Recommendations</h4>
+        <div class="career-suggestions">
+          {{ suggestions[0] }}
+        </div>
+      </div>
+
+      <div class="visualization-container">
+        <div class="visualization-card">
+          <div class="visualization-title">Confusion Matrix</div>
+          <img src="data:image/png;base64,{{ cm_url }}" alt="Confusion Matrix">
+        </div>
+        
+        <div class="visualization-card">
+          <div class="visualization-title">Feature Importance</div>
+          <img src="data:image/png;base64,{{ fi_url }}" alt="Feature Importance">
+        </div>
+      </div>
     </div>
     {% endif %}
   </div>
+
+  <script>
+    // Add animation and loading state to form submission
+    document.querySelector('form').addEventListener('submit', function() {
+      const button = this.querySelector('button');
+      button.classList.add('loading');
+      button.innerHTML = 'Processing... <span class="loading-spinner"></span>';
+      button.disabled = true;
+    });
+
+    // Add subtle animation when the page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      const formGroups = document.querySelectorAll('.form-group');
+      formGroups.forEach((group, index) => {
+        group.style.opacity = '0';
+        group.style.transform = 'translateY(10px)';
+        
+        setTimeout(() => {
+          group.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+          group.style.opacity = '1';
+          group.style.transform = 'translateY(0)';
+        }, 100 + (index * 50));
+      });
+
+      // Add focus and blur event listeners for input animation
+      const inputs = document.querySelectorAll('input, select');
+      inputs.forEach(input => {
+        input.addEventListener('focus', function() {
+          this.parentElement.style.transform = 'translateY(-2px)';
+          this.parentElement.style.transition = 'transform 0.3s ease';
+        });
+        
+        input.addEventListener('blur', function() {
+          this.parentElement.style.transform = 'translateY(0)';
+        });
+      });
+    });
+  </script>
 </body>
 </html>
