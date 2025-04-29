@@ -17,7 +17,7 @@ app = Flask(__name__)
 # Load and Preprocess the Dataset
 def load_and_preprocess_data():
     # Loading the Dataset
-    file_path = r'D:\SEM - 6\Datamining project\adult_income_census.csv'
+    file_path = r'C:\CIT\DataMining\IncomeX\adult_income_census.csv'
     df = pd.read_csv(file_path)
     
     # Handling the Missing Values and Inconsistencies
