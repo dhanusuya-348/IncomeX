@@ -1,201 +1,233 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Income Prediction</title>
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif; /* Professional and clean font */
-            background-color: #e3f2fd; /* Very light blue background */
-            color: #37474f; /* Dark grey-blue text */
-            margin: 30px;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            animation: fadeIn 0.5s ease-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        h1, h3, h4 {
-            color: #1976d2; /* Primary blue headings */
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        h1 {
-            margin-bottom: 30px;
-            font-size: 2.2rem;
-        }
-        form {
-            background-color: #fff; /* White form background */
-            padding: 30px;
-            margin-bottom: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 12px 18px;
-            align-items: center;
-            border: 1px solid #bbdefb; /* Light blue border */
-            animation: slideIn 0.5s ease-out;
-        }
-        @keyframes slideIn {
-            from { transform: translateX(-15px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        label {
-            font-weight: 500;
-            color: #1e88e5; /* Slightly darker blue labels */
-            text-align: right;
-        }
-        input[type="text"], button[type="submit"] {
-            padding: 10px;
-            border: 1px solid #90caf9; /* Light blue border */
-            border-radius: 6px;
-            width: 80%;
-            box-sizing: border-box;
-            font-size: 0.9rem;
-            transition: border-color 0.3s ease;
-        }
-        input[type="text"]:focus {
-            outline: none;
-            border-color: #1976d2; /* Primary blue focus border */
-            box-shadow: 0 0 0 0.2rem rgba(25, 118, 210, 0.25);
-        }
-        button[type="submit"] {
-            background-color: #1976d2; /* Primary blue button */
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            font-size: 1rem;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 6px;
-            grid-column: 2 / 3;
-            justify-self: start;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-        }
-        button[type="submit"]:hover {
-            background-color: #1565c0; /* Darker blue hover */
-            transform: translateY(-2px);
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
-        }
-        .prediction-results {
-            background-color: #e0f7fa; /* Very light cyan background */
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-            margin-top: 30px;
-            animation: slideUp 0.5s ease-out;
-        }
-        @keyframes slideUp {
-            from { transform: translateY(15px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        .prediction-results h3 {
-            color: #2e7d32; /* Dark green prediction text */
-        }
-        .prediction-results p {
-            margin-bottom: 8px;
-            color: #263238; /* Very dark grey text */
-        }
-        .prediction-results strong {
-            font-weight: bold;
-        }
-        .prediction-results pre {
-            background-color: #f5f5f5; /* Light grey code background */
-            padding: 12px;
-            border-radius: 4px;
-            overflow-x: auto;
-            font-size: 0.85rem;
-            color: #212121; /* Very dark grey code text */
-            border: 1px solid #eee;
-        }
-        .prediction-results img {
-            max-width: 80%;
-            height: auto;
-            margin-top: 15px;
-            border: 1px solid #b0bec5; /* Grey-blue border for images */
-            border-radius: 6px;
-            transition: transform 0.3s ease-in-out;
-        }
-        .prediction-results img:hover {
-            transform: scale(1.02);
-        }
-        .prediction-results h4 {
-            margin-top: 20px;
-            color: #1976d2; /* Primary blue headings in results */
-            border-bottom: 2px solid #1976d2;
-            padding-bottom: 6px;
-            margin-bottom: 12px;
-            text-align: left;
-        }
-        .prediction-results ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        .prediction-results ul li {
-            padding: 6px 0;
-            border-bottom: 1px solid #e0e0e0; /* Light grey border */
-            color: #37474f;
-            transition: background-color 0.2s ease;
-        }
-        .prediction-results ul li:hover {
-            background-color: #f5f5f5;
-        }
-        .prediction-results p.suggestions {
-            animation: pulse 1s infinite alternate;
-        }
-        @keyframes pulse {
-            from { opacity: 0.8; }
-            to { opacity: 1; }
-        }
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Income Predictor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 60px 20px;
+    }
+
+    .container {
+  width: 100%;
+  max-width: 1100px; /* was 900px before */
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.8s ease;
+}
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2.5rem;
+      color: #fff;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #e0e0e0;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+      font-size: 1rem;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      transition: background 0.3s ease;
+    }
+
+    input[type="text"]:focus {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    button[type="submit"] {
+      grid-column: span 2;
+      margin-top: 20px;
+      background: linear-gradient(to right, #43e97b, #38f9d7);
+      border: none;
+      padding: 12px 20px;
+      font-size: 1.1rem;
+      color: #fff;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 15px rgba(72, 239, 184, 0.6);
+    }
+
+    .prediction-results {
+      margin-top: 40px;
+      background-color: rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      padding: 30px;
+      animation: slideUp 0.8s ease;
+    }
+
+    .prediction-results h3 {
+      color: #00ffc6;
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+
+    .prediction-results pre,
+    .prediction-results ul {
+      background-color: rgba(0, 0, 0, 0.3);
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+
+    .prediction-results ul li {
+      border-bottom: 1px solid #999;
+      padding: 6px 0;
+    }
+
+    img {
+      max-width: 100%;
+      margin-top: 20px;
+      border-radius: 12px;
+      border: 2px solid #00ffc6;
+      transition: transform 0.3s ease;
+    }
+
+    img:hover {
+      transform: scale(1.02);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      form {
+        grid-template-columns: 1fr;
+      }
+
+      button {
+        grid-column: span 1;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1>Income Prediction</h1>
-
+  <div class="container">
+    <h1>Income Prediction Dashboard</h1>
     <form method="POST" action="/predict">
-        <label for="age">Age:</label><input type="text" name="age" required>
-        <label for="workclass">Workclass:</label><input type="text" name="workclass" required>
-        <label for="fnlwgt">fnlwgt:</label><input type="text" name="fnlwgt" required>
-        <label for="education">Education:</label><input type="text" name="education" required>
-        <label for="education.num">Education Number:</label><input type="text" name="education.num" required>
-        <label for="marital.status">Marital Status:</label><input type="text" name="marital.status" required>
-        <label for="occupation">Occupation:</label><input type="text" name="occupation" required>
-        <label for="relationship">Relationship:</label><input type="text" name="relationship" required>
-        <label for="race">Race:</label><input type="text" name="race" required>
-        <label for="sex">Sex:</label><input type="text" name="sex" required>
-        <label for="native.country">Native Country:</label><input type="text" name="native.country" required>
-        <button type="submit">Predict</button>
+      <div>
+        <label>Age</label>
+        <input type="text" name="age" required>
+      </div>
+      <div>
+        <label>Workclass</label>
+        <input type="text" name="workclass" required>
+      </div>
+      <div>
+        <label>fnlwgt</label>
+        <input type="text" name="fnlwgt" required>
+      </div>
+      <div>
+        <label>Education</label>
+        <input type="text" name="education" required>
+      </div>
+      <div>
+        <label>Education Number</label>
+        <input type="text" name="education.num" required>
+      </div>
+      <div>
+        <label>Marital Status</label>
+        <input type="text" name="marital.status" required>
+      </div>
+      <div>
+        <label>Occupation</label>
+        <input type="text" name="occupation" required>
+      </div>
+      <div>
+        <label>Relationship</label>
+        <input type="text" name="relationship" required>
+      </div>
+      <div>
+        <label>Race</label>
+        <input type="text" name="race" required>
+      </div>
+      <div>
+        <label>Sex</label>
+        <input type="text" name="sex" required>
+      </div>
+      <div>
+        <label>Native Country</label>
+        <input type="text" name="native.country" required>
+      </div>
+      <button type="submit">Predict</button>
     </form>
 
     {% if prediction %}
     <div class="prediction-results">
-        <h3>Prediction: {{ prediction }}</h3>
-        <p><strong>Accuracy:</strong> {{ accuracy|round(4) }}</p>
-        <p><strong>Classification Report:</strong></p>
-        <pre>{{ cr }}</pre>
-        <h4>Feature Importance (Factors Influencing Income)</h4>
-        <ul>
-            {% for index, row in importance.iterrows() %}
-                <li><strong>{{ row['Feature'] }}:</strong> {{ row['Importance']|round(4) }}</li>
-            {% endfor %}
-        </ul>
-        <h4>Feature Importance (Factors Associated with Potentially Lower Income)</h4>
-        <ul>
-            {% for index, row in low_income_factors.iterrows() %}
-                <li><strong>{{ row['Feature'] }}:</strong> {{ row['Importance']|round(4) }}</li>
-            {% endfor %}
-        </ul>
-        <h4>Suggested Careers for Higher Income</h4>
-        <p class="suggestions">{{ suggestions[0] }}</p>
-        <h4>Confusion Matrix</h4>
-        <img src="data:image/png;base64,{{ cm_url }}" alt="Confusion Matrix">
+      <h3>Prediction: {{ prediction }}</h3>
+      <p><strong>Accuracy:</strong> {{ accuracy|round(4) }}</p>
+      <h4>Classification Report:</h4>
+      <pre>{{ cr }}</pre>
+
+      <h4>Factors Influencing Income</h4>
+      <ul>
+        {% for index, row in importance.iterrows() %}
+        <li><strong>{{ row['Feature'] }}:</strong> {{ row['Importance']|round(4) }}</li>
+        {% endfor %}
+      </ul>
+
+      <h4>Factors Associated with Lower Income</h4>
+      <ul>
+        {% for index, row in low_income_factors.iterrows() %}
+        <li><strong>{{ row['Feature'] }}:</strong> {{ row['Importance']|round(4) }}</li>
+        {% endfor %}
+      </ul>
+
+      <h4>Suggested Careers:</h4>
+      <p><em>{{ suggestions[0] }}</em></p>
+
+      <h4>Confusion Matrix</h4>
+      <img src="data:image/png;base64,{{ cm_url }}" alt="Confusion Matrix">
     </div>
     {% endif %}
+  </div>
 </body>
 </html>
